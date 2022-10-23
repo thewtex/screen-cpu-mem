@@ -3,9 +3,9 @@
 total_mem=$(/usr/bin/free -tm | /usr/bin/awk '$1 == "Mem:" { print $2 }')
 
 while(true); do
-  current_mem=$(/usr/bin/free -tm | /usr/bin/awk '$1 == "Mem:" { print $3 }')
-  current_mem_pct=$(echo "scale=3; ${current_mem}/${total_mem}" | bc -l)
-  current_mem_pct=$(echo "scale=1; ${current_mem_pct}*100/1" | bc -l)
-  echo "${current_mem}/${total_mem}MB ${current_mem_pct}%"
+  free_mem=$(/usr/bin/free -tm | /usr/bin/awk '$1 == "Mem:" { print $4 }')
+  free_mem_pct=$(echo "scale=3; ${free_mem}/${total_mem}" | bc -l)
+  free_mem_pct=$(echo "scale=1; ${free_mem_pct}*100/1" | bc -l)
+  echo "${free_mem}/${total_mem}MB ${free_mem_pct}%[f]"
   sleep 3
 done
